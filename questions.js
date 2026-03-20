@@ -36,8 +36,8 @@ const questions = [
     options: ["have", "has", "am", "is"]
   },
   {
-    question: "Yesterday was ___.",
-    options: ["sun", "sunny", "sunly", "suns"]
+    question: "The weather was ___ yesterday.",
+    options: ["sun", "sunny", "sunshine", "cloud"]
   },
   {
     question: "She ___ to school every day.",
@@ -88,7 +88,7 @@ const questions = [
     options: ["rain", "rains", "rained", "will rain"]
   },
   {
-    question: "The book ___ by my friend yesterday.",
+    question: "This book ___ to me by my friend yesterday.",
     options: ["gave", "was given", "is given", "gives"]
   },
   {
@@ -104,8 +104,8 @@ const questions = [
     options: ["will finish", "will have finished", "finish", "finished"]
   },
   {
-    question: "You ___ drive so fast - it's dangerous.",
-    options: ["mustn't", "don't have to", "shouldn't", "needn't"]
+    question: "You ___ smoke here. It's forbidden.",
+    options: ["mustn't", "don't have to", "needn't", "can't to"]
   },
   {
     question: "He is the boy ___ brother won the competition.",
