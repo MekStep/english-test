@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Placement Test</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="start-screen">
+        <h1>English Placement Test</h1>
+        <p>Press the button to start the test</p>
+        <button id="start-btn">Start Test</button>
+    </div>
+
+    <div id="quiz-screen" style="display: none;">
+        <p id="progress"></p>
+        <h2 id="section-title"></h2>
+        <h3 id="question"></h3>
+        <div id="text-block"></div>
+        <div id="answers"></div>
+
+        <div id="navigation-buttons">
+            <button id="back-btn">Back</button>
+            <button id="next-btn">Next</button>
+        </div>
+    </div>
+
+    <div id="result-screen" style="display: none;">
+        <h2>Result</h2>
+        <p id="score"></p>
+        <div id="mistakes"></div>
+        <button id="restart-btn">Restart Test</button>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
