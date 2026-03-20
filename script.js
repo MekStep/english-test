@@ -11,6 +11,7 @@ const nextBtn = document.getElementById("next-btn");
 const restartBtn = document.getElementById("restart-btn");
 
 const progressElement = document.getElementById("progress");
+const progressBar = document.getElementById("progress-bar");
 const sectionTitleElement = document.getElementById("section-title");
 const questionElement = document.getElementById("question");
 const textBlockElement = document.getElementById("text-block");
@@ -31,15 +32,24 @@ function startQuiz() {
   quizScreen.style.display = "block";
   resultScreen.style.display = "none";
 
+  progressBar.style.width = "0%"; // reset
+
   showQuestion();
 }
 
 function showQuestion() {
   const currentQuestion = questions[currentQuestionIndex];
 
-  progressElement.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+  // Progress text (Հայերեն)
+  progressElement.textContent = `Հարց ${currentQuestionIndex + 1} / ${questions.length}`;
+
+  // Progress bar
+  const progressPercent = ((currentQuestionIndex + 1) / questions.length) * 100;
+  progressBar.style.width = `${progressPercent}%`;
+
   sectionTitleElement.textContent = "GRAMMAR";
   questionElement.textContent = currentQuestion.question;
+
   textBlockElement.innerHTML = "";
   answersElement.innerHTML = "";
 
@@ -70,7 +80,7 @@ function showQuestion() {
 
 function goNext() {
   if (!userAnswers[currentQuestionIndex]) {
-    alert("Please select an answer.");
+    alert("Խնդրում ենք ընտրել պատասխան");
     return;
   }
 
@@ -91,7 +101,7 @@ function goBack() {
 
 function showResults() {
   let correct = 0;
-  let mistakesHtml = "<h3>Mistakes:</h3>";
+  let mistakesHtml = "<h3>Սխալներ</h3>";
 
   questions.forEach((question, index) => {
     if (userAnswers[index] === correctAnswers[index]) {
@@ -100,14 +110,14 @@ function showResults() {
       const correctIndex = ["a", "b", "c", "d"].indexOf(correctAnswers[index]);
       const userIndex = ["a", "b", "c", "d"].indexOf(userAnswers[index]);
 
-      const correctText = correctIndex !== -1 ? question.options[correctIndex] : "Unknown";
-      const userText = userIndex !== -1 ? question.options[userIndex] : "No answer";
+      const correctText = correctIndex !== -1 ? question.options[correctIndex] : "Անհայտ";
+      const userText = userIndex !== -1 ? question.options[userIndex] : "Պատասխան չկա";
 
       mistakesHtml += `
         <div class="mistake-item">
           <p><strong>${index + 1}. ${question.question}</strong></p>
-          <p>Your answer: ${userText}</p>
-          <p>Correct answer: ${correctText}</p>
+          <p><strong>Քո պատասխանը՝</strong> ${userText}</p>
+          <p><strong>Ճիշտ պատասխանը՝</strong> ${correctText}</p>
         </div>
       `;
     }
@@ -121,15 +131,17 @@ function showResults() {
   resultScreen.style.display = "block";
 
   scoreElement.innerHTML = `
-    Total Questions: ${questions.length} <br>
-    Correct Answers: ${correct} <br>
-    Wrong Answers: ${wrong} <br>
-    Score: ${percent}% <br>
-    <strong>Level: ${level}</strong>
+    <h2>Արդյունք</h2>
+    Ընդհանուր հարցեր՝ ${questions.length} <br>
+    Ճիշտ պատասխաններ՝ ${correct} <br>
+    Սխալ պատասխաններ՝ ${wrong} <br>
+    Արդյունք (%)՝ ${percent}% <br>
+    <strong>Մակարդակ՝ ${level}</strong>
   `;
 
   if (correct === questions.length) {
-    mistakesElement.innerHTML = "<h3>Mistakes:</h3><p>No mistakes. Great job!</p>";
+    mistakesElement.innerHTML =
+      "<h3>Սխալներ</h3><p>Սխալներ չկան։ Գերազանց արդյունք։</p>";
   } else {
     mistakesElement.innerHTML = mistakesHtml;
   }
@@ -139,4 +151,6 @@ function restartQuiz() {
   startScreen.style.display = "block";
   quizScreen.style.display = "none";
   resultScreen.style.display = "none";
+
+  progressBar.style.width = "0%";
 }
